@@ -1,7 +1,6 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useLayoutEffect } from 'react'
 import { Row, Col, Modal, notification, message as antdMsg } from 'antd'
 import { BlockOutlined } from '@ant-design/icons'
-import { useObservableGetState, useSubscription } from 'observable-hooks'
 import { useTranslate, Trans } from '@/_helpers/i18n'
 import {
   ProfileID,
@@ -15,8 +14,8 @@ import {
   updateProfileIDList,
   addProfile
 } from '@/_helpers/profile-manager'
-import { SortableList, arrayMove } from '@/options/components/SortableList'
-import { profile$$, profileIDList$$ } from '@/options/data'
+import { useSelector } from '@/content/redux'
+import { SortableList, reorder } from '@/options/components/SortableList'
 import { useListLayout } from '@/options/helpers/layout'
 import { useCheckDictAuth } from '@/options/helpers/use-check-dict-auth'
 import { EditNameModal } from './EditNameModal'
@@ -24,7 +23,7 @@ import { EditNameModal } from './EditNameModal'
 export const Profiles: FC = () => {
   const { t } = useTranslate('options')
   const checkDictAuth = useCheckDictAuth()
-  const activeProfileID = useObservableGetState(profile$$, '', 'id')
+  const activeProfileID = useSelector(state => state.activeProfile.id)
   const [showAddProfileModal, setShowAddProfileModal] = useState(false)
   const [showEditNameModal, setShowEditNameModal] = useState(false)
   const [editingProfileID, setEditingProfileID] = useState<ProfileID | null>(
@@ -32,9 +31,14 @@ export const Profiles: FC = () => {
   )
   const listLayout = useListLayout()
 
+  const storeProfileIDList = useSelector(state => state.profiles)
   // make a local copy to avoid flickering on drag end
-  const [profileIDList, setProfileIDList] = useState<ProfileIDList>([])
-  useSubscription(profileIDList$$, setProfileIDList)
+  const [profileIDList, setProfileIDList] = useState<ProfileIDList>(
+    storeProfileIDList
+  )
+  useLayoutEffect(() => {
+    setProfileIDList(storeProfileIDList)
+  }, [storeProfileIDList])
 
   const tryTo = async (action: () => any): Promise<void> => {
     try {
@@ -115,11 +119,8 @@ export const Profiles: FC = () => {
               onOk: () => tryTo(() => removeProfile(id))
             })
           }}
-          onSortEnd={({ oldIndex, newIndex }) => {
-            if (oldIndex === newIndex) {
-              return
-            }
-            const newList = arrayMove(profileIDList.slice(), oldIndex, newIndex)
+          onOrderChanged={(oldIndex, newIndex) => {
+            const newList = reorder(profileIDList, oldIndex, newIndex)
             setProfileIDList(newList)
             tryTo(() => updateProfileIDList(newList))
           }}

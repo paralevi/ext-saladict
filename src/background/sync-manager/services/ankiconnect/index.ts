@@ -18,6 +18,8 @@ export interface SyncConfig {
   escapeContext: boolean
   escapeTrans: boolean
   escapeNote: boolean
+  /** Sync to AnkiWeb after added */
+  syncServer: boolean
 }
 
 export class Service extends SyncService<SyncConfig> {
@@ -34,7 +36,8 @@ export class Service extends SyncService<SyncConfig> {
       tags: '',
       escapeContext: true,
       escapeTrans: true,
-      escapeNote: true
+      escapeNote: true,
+      syncServer: false
     }
   }
 
@@ -118,6 +121,16 @@ export class Service extends SyncService<SyncConfig> {
         }
       })
     )
+
+    if (this.config.syncServer) {
+      try {
+        await this.request('sync')
+      } catch (e) {
+        if (process.env.DEBUG) {
+          console.warn(e)
+        }
+      }
+    }
   }
 
   async addWord(word: Readonly<Word>) {
@@ -150,16 +163,16 @@ export class Service extends SyncService<SyncConfig> {
 
   async addNoteType() {
     this.noteFileds = [
-      'Date.',
-      'Text.',
-      'Translation.',
-      'Context.',
-      'ContextCloze.',
-      'Note.',
-      'Title.',
-      'Url.',
-      'Favicon.',
-      'Audio.'
+      'Date',
+      'Text',
+      'Translation',
+      'Context',
+      'ContextCloze',
+      'Note',
+      'Title',
+      'Url',
+      'Favicon',
+      'Audio'
     ]
 
     await this.request('createModel', {
@@ -223,24 +236,35 @@ export class Service extends SyncService<SyncConfig> {
       this.noteFileds = await this.getNotefields()
     }
     return {
+      // Date
       [this.noteFileds[0]]: `${word.date}`,
+      // Text
       [this.noteFileds[1]]: word.text || '',
+      // Translation
       [this.noteFileds[2]]: this.parseTrans(
         word.trans,
         this.config.escapeTrans
       ),
+      // Context
       [this.noteFileds[3]]: this.multiline(
         word.context,
         this.config.escapeContext
       ),
-      [this.noteFileds[4]]: this.multiline(
-        word.context.split(word.text).join(`{{c1::${word.text}}}`),
-        this.config.escapeContext
-      ),
+      // ContextCloze
+      [this.noteFileds[4]]:
+        this.multiline(
+          word.context.split(word.text).join(`{{c1::${word.text}}}`),
+          this.config.escapeContext
+        ) || `{{c1::${word.text}}}`,
+      // Note
       [this.noteFileds[5]]: this.multiline(word.note, this.config.escapeNote),
+      // Title
       [this.noteFileds[6]]: word.title || '',
+      // Url
       [this.noteFileds[7]]: word.url || '',
+      // Favicon
       [this.noteFileds[8]]: word.favicon || '',
+      // Audio
       [this.noteFileds[9]]: '' // @TODO
     }
   }
@@ -251,18 +275,18 @@ export class Service extends SyncService<SyncConfig> {
     })
 
     // Anki connect bug
-    return nf?.includes('Date')
+    return nf?.includes('Date.')
       ? [
-          'Date',
-          'Text',
-          'Translation',
-          'Context',
-          'ContextCloze',
-          'Note',
-          'Title',
-          'Url',
-          'Favicon',
-          'Audio'
+          'Date.',
+          'Text.',
+          'Translation.',
+          'Context.',
+          'ContextCloze.',
+          'Note.',
+          'Title.',
+          'Url.',
+          'Favicon.',
+          'Audio.'
         ]
       : nf?.includes('日期')
       ? [
@@ -278,16 +302,16 @@ export class Service extends SyncService<SyncConfig> {
           'Audio'
         ]
       : [
-          'Date.',
-          'Text.',
-          'Translation.',
-          'Context.',
-          'ContextCloze.',
-          'Note.',
-          'Title.',
-          'Url.',
-          'Favicon.',
-          'Audio.'
+          'Date',
+          'Text',
+          'Translation',
+          'Context',
+          'ContextCloze',
+          'Note',
+          'Title',
+          'Url',
+          'Favicon',
+          'Audio'
         ]
   }
 
@@ -353,6 +377,7 @@ export class Service extends SyncService<SyncConfig> {
 function cardText(front: boolean, nf: string[]) {
   return `{{#${nf[4]}}}
 <section>{{cloze:${nf[4]}}}</section>
+<section>{{{{type:cloze:${nf[4]}}}</section>
 {{#${nf[2]}}}
 <section>{{${nf[2]}}}</section>
 {{/${nf[2]}}}

@@ -1,8 +1,16 @@
-import React, { FC, ReactNode, useRef, useState, useMemo } from 'react'
-import classNames from 'classnames'
+import React, {
+  FC,
+  ReactNode,
+  useRef,
+  useState,
+  useMemo,
+  useEffect
+} from 'react'
+import classnames from 'classnames'
 import { useUpdateEffect } from 'react-use'
 import { getScrollbarWidth } from '@/_helpers/scrollbar-width'
 import { SALADICT_PANEL, isInternalPage } from '@/_helpers/saladict'
+import { HoverBoxContext } from '@/components/HoverBox'
 
 export interface DictPanelProps {
   /** Update position command from uptream */
@@ -18,9 +26,6 @@ export interface DictPanelProps {
   maxHeight: number
   fontSize: number
 
-  withAnimation: boolean
-  darkMode: boolean
-
   menuBar: ReactNode
   mtaBox: ReactNode
   dictList: ReactNode
@@ -31,8 +36,12 @@ export interface DictPanelProps {
 }
 
 export const DictPanel: FC<DictPanelProps> = props => {
+  const rootElRef = useRef<HTMLDivElement | null>(null)
+
   const [x, setX] = useState(() => reconcileX(props.width, props.coord.x))
   const [y, setY] = useState(() => reconcileY(props.height, props.coord.y))
+
+  const userDraggedRef = useRef(false)
 
   const coordSnapshotRef = useRef<{ x: number; y: number }>()
 
@@ -53,9 +62,18 @@ export const DictPanel: FC<DictPanelProps> = props => {
   }, [props.coord])
 
   useUpdateEffect(() => {
-    setX(x => reconcileX(props.width, x))
-    setY(y => reconcileY(props.height, y))
+    // only reconcile if never been dragged
+    if (!userDraggedRef.current) {
+      setX(x => reconcileX(props.width, x))
+      setY(y => reconcileY(props.height, y))
+    }
   }, [props.width, props.height])
+
+  useEffect(() => {
+    if (props.dragStartCoord) {
+      userDraggedRef.current = true
+    }
+  }, [props.dragStartCoord])
 
   const dragStartPanelCoord = useMemo(
     () => (props.dragStartCoord ? { x, y } : null),
@@ -63,74 +81,76 @@ export const DictPanel: FC<DictPanelProps> = props => {
   )
 
   return (
+    // an extra layer for float box
     <div
-      className={classNames(
-        `dictPanel-Root ${SALADICT_PANEL}`,
-        'saladict-theme',
-        {
-          isAnimate: props.withAnimation,
-          isDragging: props.dragStartCoord,
-          darkMode: props.darkMode
-        }
-      )}
-      style={{
-        left: x,
-        top: y,
-        zIndex: isInternalPage() ? 999 : 2147483647, // for popups on options page
-        width: props.width,
-        height: props.height,
-        '--panel-width': props.width + 'px',
-        '--panel-max-height': props.maxHeight + 'px',
-        '--panel-font-size': props.fontSize + 'px'
-      }}
+      ref={rootElRef}
+      className="dictPanel-FloatBox-Container saladict-theme"
     >
-      <div className="dictPanel-Head">{props.menuBar}</div>
       <div
-        className={`dictPanel-Body${
-          getScrollbarWidth() > 0 ? ' fancy-scrollbar' : ''
-        }`}
+        className={classnames('dictPanel-Root', SALADICT_PANEL, {
+          isDragging: props.dragStartCoord
+        })}
+        style={{
+          left: x,
+          top: y,
+          zIndex: isInternalPage() ? 999 : 2147483647, // for popups on options page
+          width: props.width,
+          height: props.height,
+          '--panel-width': props.width + 'px',
+          '--panel-max-height': props.maxHeight + 'px',
+          '--panel-font-size': props.fontSize + 'px'
+        }}
       >
-        {props.mtaBox}
-        {props.dictList}
+        <div className="dictPanel-Head">{props.menuBar}</div>
+        <HoverBoxContext.Provider value={rootElRef}>
+          <div
+            className={`dictPanel-Body${
+              getScrollbarWidth() > 0 ? ' fancy-scrollbar' : ''
+            }`}
+          >
+            {props.mtaBox}
+            {props.dictList}
+          </div>
+        </HoverBoxContext.Provider>
+        {props.waveformBox}
+        {props.dragStartCoord && (
+          <div
+            className="dictPanel-DragMask"
+            onMouseMove={e => {
+              if (dragStartPanelCoord && props.dragStartCoord) {
+                e.stopPropagation()
+                e.preventDefault()
+                setX(e.clientX - props.dragStartCoord.x + dragStartPanelCoord.x)
+                setY(e.clientY - props.dragStartCoord.y + dragStartPanelCoord.y)
+              }
+            }}
+            onTouchMove={e => {
+              if (dragStartPanelCoord && props.dragStartCoord) {
+                e.stopPropagation()
+                e.preventDefault()
+                setX(
+                  e.changedTouches[0].clientX -
+                    props.dragStartCoord.x +
+                    dragStartPanelCoord.x
+                )
+                setY(
+                  e.changedTouches[0].clientY -
+                    props.dragStartCoord.y +
+                    dragStartPanelCoord.y
+                )
+              }
+            }}
+            onMouseOut={e => {
+              if (!e.relatedTarget) {
+                props.onDragEnd()
+              }
+            }}
+            onMouseUp={props.onDragEnd}
+            onTouchCancel={props.onDragEnd}
+            onTouchEnd={props.onDragEnd}
+          />
+        )}
       </div>
-      {props.waveformBox}
-      {props.dragStartCoord && (
-        <div
-          className="dictPanel-DragMask"
-          onMouseMove={e => {
-            if (dragStartPanelCoord && props.dragStartCoord) {
-              e.stopPropagation()
-              e.preventDefault()
-              setX(e.clientX - props.dragStartCoord.x + dragStartPanelCoord.x)
-              setY(e.clientY - props.dragStartCoord.y + dragStartPanelCoord.y)
-            }
-          }}
-          onTouchMove={e => {
-            if (dragStartPanelCoord && props.dragStartCoord) {
-              e.stopPropagation()
-              e.preventDefault()
-              setX(
-                e.changedTouches[0].clientX -
-                  props.dragStartCoord.x +
-                  dragStartPanelCoord.x
-              )
-              setY(
-                e.changedTouches[0].clientY -
-                  props.dragStartCoord.y +
-                  dragStartPanelCoord.y
-              )
-            }
-          }}
-          onMouseOut={e => {
-            if (!e.relatedTarget) {
-              props.onDragEnd()
-            }
-          }}
-          onMouseUp={props.onDragEnd}
-          onTouchCancel={props.onDragEnd}
-          onTouchEnd={props.onDragEnd}
-        />
-      )}
     </div>
   )
 }

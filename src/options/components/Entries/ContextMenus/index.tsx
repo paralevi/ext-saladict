@@ -1,28 +1,28 @@
-import React, { FC, useContext, useState } from 'react'
+import React, { FC, useState, useLayoutEffect } from 'react'
 import { Row, Col } from 'antd'
-import { useSubscription } from 'observable-hooks'
-import { isFirefox } from '@/_helpers/saladict'
 import { useTranslate } from '@/_helpers/i18n'
-import { GlobalsContext, config$$ } from '@/options/data'
-import { SortableList, arrayMove } from '@/options/components/SortableList'
+import { useSelector } from '@/content/redux'
+import { SortableList, reorder } from '@/options/components/SortableList'
 import { getConfigPath } from '@/options/helpers/path-joiner'
-import { upload } from '@/options/helpers/upload'
 import { useListLayout } from '@/options/helpers/layout'
+import { useUpload } from '@/options/helpers/upload'
 import { AddModal } from './AddModal'
 import { EditModal } from './EditeModal'
 
 export const ContextMenus: FC = () => {
   const { t } = useTranslate(['options', 'common', 'menus'])
-  const globals = useContext(GlobalsContext)
+  const upload = useUpload()
   const [showAddModal, setShowAddModal] = useState(false)
   const [editingMenu, setEditingMenu] = useState<string | null>(null)
   const listLayout = useListLayout()
-
+  const contextMenus = useSelector(state => state.config.contextMenus)
   // make a local copy to avoid flickering on drag end
-  const [selectedMenus, setSelectedMenus] = useState<ReadonlyArray<string>>([])
-  useSubscription(config$$, config => {
-    setSelectedMenus(config.contextMenus.selected)
-  })
+  const [selectedMenus, setSelectedMenus] = useState<ReadonlyArray<string>>(
+    contextMenus.selected
+  )
+  useLayoutEffect(() => {
+    setSelectedMenus(contextMenus.selected)
+  }, [contextMenus.selected])
 
   return (
     <Row>
@@ -30,24 +30,14 @@ export const ContextMenus: FC = () => {
         <SortableList
           title={t('nav.ContextMenus')}
           description={<p>{t('config.opt.contextMenus_description')}</p>}
-          list={selectedMenus
-            .filter(id => {
-              // FF policy
-              if (isFirefox && id === 'youdao_page_translate') {
-                return false
-              }
-              return true
-            })
-            .map(id => {
-              const item = globals.config.contextMenus.all[id]
-              return {
-                value: id,
-                title: typeof item === 'string' ? t(`menus:${id}`) : item.name
-              }
-            })}
-          disableEdit={(index, item) =>
-            globals.config.contextMenus.all[item.value] === 'x'
-          }
+          list={selectedMenus.map(id => {
+            const item = contextMenus.all[id]
+            return {
+              value: id,
+              title: typeof item === 'string' ? t(`menus:${id}`) : item.name
+            }
+          })}
+          disableEdit={(index, item) => contextMenus.all[item.value] === 'x'}
           onAdd={() => setShowAddModal(true)}
           onEdit={index => {
             setEditingMenu(selectedMenus[index])
@@ -60,11 +50,8 @@ export const ContextMenus: FC = () => {
             })
             setSelectedMenus(newList)
           }}
-          onSortEnd={({ oldIndex, newIndex }) => {
-            if (oldIndex === newIndex) {
-              return
-            }
-            const newList = arrayMove(selectedMenus.slice(), oldIndex, newIndex)
+          onOrderChanged={(oldIndex, newIndex) => {
+            const newList = reorder(selectedMenus, oldIndex, newIndex)
             upload({
               [getConfigPath('contextMenus', 'selected')]: newList
             })

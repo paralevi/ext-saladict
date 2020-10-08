@@ -32,50 +32,52 @@ storiesOf('Content Scripts|WordEditor', module)
       const darkMode = boolean('Dark Mode', false)
 
       return (
-        <div
-          className={classNames('saladict-theme', { darkMode })}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '20px 0'
-          }}
-        >
-          <WordEditorPanel
-            containerWidth={number('Panel X', 450 + 100)}
-            btns={
-              boolean('With Buttons', true)
-                ? [
-                    {
-                      type: 'normal',
-                      title: 'Normal Button',
-                      onClick: action('Normal button clicked')
-                    },
-                    {
-                      type: 'primary',
-                      title: 'Primary Button',
-                      onClick: action('Primary button clicked')
-                    }
-                  ]
-                : undefined
-            }
-            title={text('Title', faker.random.word())}
-            onClose={action('Close')}
+        <div className={classNames({ darkMode })}>
+          <div
+            className="saladict-theme"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              padding: '20px 0'
+            }}
           >
-            <div style={{ padding: 10 }}>
-              {text('Content', faker.lorem.paragraphs())
-                .split('\n')
-                .map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-            </div>
-          </WordEditorPanel>
+            <WordEditorPanel
+              containerWidth={number('Panel X', 450 + 100)}
+              btns={
+                boolean('With Buttons', true)
+                  ? [
+                      {
+                        type: 'normal',
+                        title: 'Normal Button',
+                        onClick: action('Normal button clicked')
+                      },
+                      {
+                        type: 'primary',
+                        title: 'Primary Button',
+                        onClick: action('Primary button clicked')
+                      }
+                    ]
+                  : undefined
+              }
+              title={text('Title', faker.random.word())}
+              onClose={action('Close')}
+            >
+              <div style={{ padding: 10 }}>
+                {text('Content', faker.lorem.paragraphs())
+                  .split('\n')
+                  .map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+              </div>
+            </WordEditorPanel>
+          </div>
         </div>
       )
     },
     {
       decorators: [
         withLocalStyle(require('./WordEditorPanel.scss')),
-        withLocalStyle(require('@/_sass_global/_theme.scss'))
+        withLocalStyle(require('@/_sass_shared/_theme.scss'))
       ],
       jsx: { skip: 1 }
     }

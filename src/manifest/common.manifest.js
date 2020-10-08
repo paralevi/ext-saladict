@@ -39,6 +39,9 @@ module.exports = {
     'open-google': {
       description: '__MSG_command_open_google__'
     },
+    'open-caiyun': {
+      description: '__MSG_command_open_caiyun__'
+    },
     'next-profile': {
       description: '__MSG_command_next_profile__'
     },
@@ -74,7 +77,6 @@ module.exports = {
   permissions: [
     '<all_urls>',
     'alarms',
-    'clipboardRead',
     'contextMenus',
     'cookies',
     'notifications',
@@ -85,7 +87,7 @@ module.exports = {
     'webRequestBlocking'
   ],
 
-  optional_permissions: ['clipboardWrite'],
+  optional_permissions: ['clipboardRead', 'clipboardWrite'],
 
   content_security_policy: "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

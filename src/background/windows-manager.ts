@@ -149,30 +149,36 @@ export class QsPanelManager {
     return originTop - offset.panel
   }
 
+  /**
+   * @param preload force preload word. otherwise let the panel decide.
+   */
   async create(preload?: Word): Promise<void> {
     this.isSidebar = false
 
     let wordString = ''
-    try {
-      if (!preload) {
-        if (window.appConfig.qsPreload === 'selection') {
-          const tab = (
-            await browser.tabs.query({
-              active: true,
-              lastFocusedWindow: true
-            })
-          )[0]
-          if (tab && tab.id) {
-            preload = await message.send<'PRELOAD_SELECTION'>(tab.id, {
-              type: 'PRELOAD_SELECTION'
-            })
-          }
+    let lastTabString = ''
+
+    if (preload) {
+      try {
+        wordString = '&word=' + encodeURIComponent(JSON.stringify(preload))
+      } catch (error) {
+        if (process.env.DEBUG) {
+          console.error(error)
         }
       }
-      if (preload) {
-        wordString = '&word=' + encodeURIComponent(JSON.stringify(preload))
+    } else {
+      if (window.appConfig.qsPreload === 'selection') {
+        const tab = (
+          await browser.tabs.query({
+            active: true,
+            lastFocusedWindow: true
+          })
+        )[0]
+        if (tab && tab.id) {
+          lastTabString = '&lastTab=' + tab.id
+        }
       }
-    } catch (e) {}
+    }
 
     await this.mainWindowsManager.takeSnapshot()
 
@@ -188,7 +194,7 @@ export class QsPanelManager {
         ...qsPanelRect,
         type: 'popup',
         url: browser.runtime.getURL(
-          `quick-search.html?sidebar=${window.appConfig.qssaSidebar}${wordString}`
+          `quick-search.html?sidebar=${window.appConfig.qssaSidebar}${wordString}${lastTabString}`
         )
       })
     } catch (err) {

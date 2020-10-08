@@ -5,10 +5,13 @@ export const locale = {
   msg_update_error: '设置更新失败',
   msg_updated: '设置已更新',
   msg_first_time_notice: '初次使用注意',
+  msg_err_permission: '权限“{{permission}}”申请失败。',
   unsave_confirm: '修改尚未保存，确定放弃？',
   nativeSearch: '浏览器外划词',
   firefox_shortcuts:
     '地址栏输入 about:addons 打开，点击右上方的齿轮，选择最后一项管理扩展快捷键。',
+  tutorial: '教程',
+  page_selection: '网页划词',
 
   nav: {
     General: '基本选项',
@@ -25,7 +28,8 @@ export const locale = {
     ContextMenus: '右键菜单',
     BlackWhiteList: '黑白名单',
     ImportExport: '导入导出',
-    Privacy: '隐私设置'
+    Privacy: '隐私设置',
+    Permissions: '权限管理'
   },
 
   config: {
@@ -33,6 +37,9 @@ export const locale = {
     active_help: '关闭后「快捷查词」功能依然可用。',
     animation: '开启动画过渡',
     animation_help: '在低性能设备上关闭过渡动画可减少渲染负担。',
+    runInBg: '后台保持运行',
+    runInBg_help:
+      '让浏览器关闭后依然保持后台运行，从而继续响应快捷键以及浏览器外划词。',
     darkMode: '黑暗模式',
     langCode: '界面语言',
     editOnFav: '红心单词时弹出编辑面板',
@@ -65,7 +72,7 @@ export const locale = {
     mode: '普通划词',
     panelMode: '查词面板内部划词',
     pinMode: '查词面板钉住后划词',
-    qsPanelMode: '页面划词',
+    qsPanelMode: '独立窗口响应页面划词',
     bowlHover: '图标悬停查词',
     bowlHover_help: '鼠标悬停在沙拉图标上触发查词，否则需要点击。',
     autopron: {
@@ -269,7 +276,6 @@ export const locale = {
 
     ankiconnect: {
       description: '请确保 Anki Connect 插件已安装且 Anki 在后台运行。',
-      tutorial: '教程',
       checking: '连接中...',
       deck_confirm: '牌组「{{deck}}」不存在 Anki 中，是否自动添加？',
       deck_error: '无法创建牌组「{{deck}}」。',
@@ -297,7 +303,9 @@ export const locale = {
       tags_help: 'Anki 笔记可以附带标签。以逗号分割。',
       escapeHTML: '转义 HTML',
       escapeHTML_help:
-        '对笔记内容中的 HTML 字符进行转义。如手动进行 HTML 排版请关闭选项。'
+        '对笔记内容中的 HTML 字符进行转义。如手动进行 HTML 排版请关闭选项。',
+      syncServer: '同步服务器',
+      syncServer_help: '单词添加到本地 Anki 后自动同步到服务器（如 AnkiWeb）。'
     }
   },
 
@@ -386,5 +394,23 @@ export const locale = {
   third_party_privacy: '第三方隐私',
   third_party_privacy_help:
     '沙拉查词不会收集更多数据，但在查词时单词以及相关 cookies 数据会发送给第三方词典服务（与在该网站上查词一样），如果你不希望被该服务获取数据，请在「词典设置」中关闭相应词典。',
-  third_party_privacy_extra: '本特性为沙拉查词核心功能，无法关闭。'
+  third_party_privacy_extra: '本特性为沙拉查词核心功能，无法关闭。',
+
+  permissions: {
+    success: '申请权限成功',
+    cancel_success: '取消权限成功',
+    failed: '申请权限失败',
+    cancelled: '申请权限被用户取消',
+    missing: '缺少权限「{{permission}}」。请给予权限或者关闭相关功能。',
+    clipboardRead: '读取剪贴板',
+    clipboardRead_help:
+      '快捷查词或者右上弹框设置预加载剪贴板时需要读取剪贴板权限。',
+    clipboardWrite: '写入剪贴板',
+    clipboardWrite_help:
+      '机器翻译词典标题栏菜单复制原文译文或生词本导出到剪贴板需要写入剪贴板权限。'
+  },
+
+  unsupportedFeatures: {
+    ff: '火狐尚不支持「{{feature}}」功能。'
+  }
 }

@@ -7,10 +7,13 @@ export const locale: typeof _locale = {
   msg_update_error: 'Unable to update',
   msg_updated: 'Successfully updated',
   msg_first_time_notice: 'First time notice',
+  msg_err_permission: 'Unable to request "{{permission}}" permission.',
   unsave_confirm: 'Settings not saved. Sure to leave?',
   nativeSearch: 'search selected text outside of browser',
   firefox_shortcuts:
     'Open about:addons, click the top right "gear" button, choose the last "Manage extension shortcuts".',
+  tutorial: 'Tutorial',
+  page_selection: 'Page Selection',
 
   nav: {
     General: 'General',
@@ -27,7 +30,8 @@ export const locale: typeof _locale = {
     ContextMenus: 'Context Menus',
     BlackWhiteList: 'Black/White List',
     ImportExport: 'Import/Export',
-    Privacy: 'Privacy'
+    Privacy: 'Privacy',
+    Permissions: 'Permissions'
   },
 
   config: {
@@ -36,6 +40,9 @@ export const locale: typeof _locale = {
       '"Quick Search" is still available even if Inline translation is turned off.',
     animation: 'Animation transitions',
     animation_help: 'Switch off animation transitions to reduce runtime cost.',
+    runInBg: 'Keep in Background',
+    runInBg_help:
+      'Keep the browser running in background after close so that global shortcuts still work.',
     darkMode: 'Dark Mode',
     langCode: 'App Language',
     editOnFav: 'Open WordEditor when saving',
@@ -43,7 +50,7 @@ export const locale: typeof _locale = {
       'When turned off, new words will be added to notebook directly.',
     searchHistory: 'Keep search history',
     searchHistory_help:
-      'Search histry might unintentionally reveal your browsing history.',
+      'Your browsing history could be unintentionally revealed in Search history.',
     searchHistoryInco: 'Also in incognito mode',
     ctxTrans: 'Context Translate Engines',
     ctxTrans_help:
@@ -70,8 +77,8 @@ export const locale: typeof _locale = {
     doubleClickDelay: 'Double Click Delay',
     mode: 'Normal Selection',
     panelMode: 'Inside Dict Panel',
-    pinMode: 'When Panel Is Pinned',
-    qsPanelMode: 'Page Selection',
+    pinMode: 'When Panel is Pinned',
+    qsPanelMode: 'When Standalone Panel is Opened',
     bowlHover: 'Icon Mouse Hover',
     bowlHover_help:
       'Hover on the bowl icon to trigger searching instead of clicking.',
@@ -283,7 +290,6 @@ export const locale: typeof _locale = {
     ankiconnect: {
       description:
         'Please make sure Anki Connect plugin is installed and Anki is running. You can also update word to Anki in Word Editor.',
-      tutorial: 'Tutorial',
       checking: 'Checking...',
       deck_confirm:
         'Deck "{{deck}}" does not exist in Anki. Generate a new deck?',
@@ -308,12 +314,15 @@ export const locale: typeof _locale = {
         'If deck does not exist you can generate a default one automatically by clicking "Verify Anki Connect" below.',
       noteType: 'Note Type',
       noteType_help:
-        'Anki note type includes a set of fields and card type. If note type does not exist you can generate a default one automatically by clicking "Verify Anki Connect" below. DO NOT change fieled names when editing or adding card templates in Anki',
+        'Anki note type includes a set of fields and card type. If note type does not exist you can generate a default one automatically by clicking "Verify Anki Connect" below. DO NOT change field names when editing or adding card templates in Anki',
       tags: 'Tags',
       tags_help: 'Anki notes can include tags separated with commas.',
       escapeHTML: 'Escape HTML',
       escapeHTML_help:
-        'Escape HTML entities. Turn off if using HTML for manual layout.'
+        'Escape HTML entities. Turn off if using HTML for manual layout.',
+      syncServer: 'Sync Server',
+      syncServer_help:
+        'Sync to server(e.g. AnkiWeb) after new words being added to local Anki.'
     }
   },
 
@@ -402,7 +411,26 @@ export const locale: typeof _locale = {
 
   third_party_privacy: 'Third Party Privacy',
   third_party_privacy_help:
-    'Saladict will not collect further information but search text and releated cookies will be sent to third party dictionary services(just like how you would search on their websites). If you do not want third party services to collect you data, remove the dictionaries at "Dictionaries" settings.',
+    'Saladict will not collect further information but search text and releated cookies will be sent to third party dictionary services(just like how you would search on their websites). If you do not want third party services to collect you data, remove the corresponding dictionaries at "Dictionaries" settings.',
   third_party_privacy_extra:
-    'Cannot be turned off as it is the core functionality of Saladict.'
+    'Cannot be turned off as it is the core functionality of Saladict.',
+
+  permissions: {
+    success: 'Permission requested',
+    cancel_success: 'Permission cancelled',
+    failed: 'Permission request failed',
+    cancelled: 'Permission request cancelled by user',
+    missing:
+      'Missing permission "{{permission}}". Either grant it or disable related functions.',
+    clipboardRead: 'Read Clipboard',
+    clipboardRead_help:
+      'This permission is needed when clipboard preload is enable for popup panel or quick search panel.',
+    clipboardWrite: 'Write Clipboard',
+    clipboardWrite_help:
+      'This permission is needed when using titlebar menus to copy source/target text from machine translator.'
+  },
+
+  unsupportedFeatures: {
+    ff: 'Feature "{{feature}}" is not supported in Firefox.'
+  }
 }

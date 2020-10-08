@@ -7,10 +7,13 @@ export const locale: typeof _locale = {
   msg_update_error: '設定更新失敗',
   msg_updated: '設定已更新',
   msg_first_time_notice: '初次使用注意',
+  msg_err_permission: '許可權“{{permission}}”申請失敗。',
   unsave_confirm: '修改尚未儲存，確定放棄？',
   nativeSearch: '瀏覽器外選字翻譯',
   firefox_shortcuts:
     '位址列跳轉到 about:addons，點選右上方的齒輪，選擇最後一項管理擴充套件快捷鍵',
+  tutorial: '教程',
+  page_selection: '網頁選字',
 
   nav: {
     General: '基本選項',
@@ -27,7 +30,8 @@ export const locale: typeof _locale = {
     ContextMenus: '右鍵選單',
     BlackWhiteList: '黑白名單',
     ImportExport: '匯入匯出',
-    Privacy: '隱私設定'
+    Privacy: '隱私設定',
+    Permissions: '許可權管理'
   },
 
   config: {
@@ -35,6 +39,9 @@ export const locale: typeof _locale = {
     active_help: '關閉後「迅速查字」功能依然可用。',
     animation: '啟用轉換動畫',
     animation_help: '在低效能裝置上關閉過渡動畫可減少渲染負擔。',
+    runInBg: '保持瀏覽器執行',
+    runInBg_help:
+      '讓瀏覽器關閉後依然保持執行，從而繼續響應快捷鍵以及瀏覽器外劃字（見右上角官網使用說明）。',
     darkMode: '黑暗模式',
     langCode: '介面語言',
     editOnFav: '紅心單字時彈出編輯介面',
@@ -64,10 +71,10 @@ export const locale: typeof _locale = {
     language_extra:
       '注意日語與韓語也包含了漢字。法語、德語和西語也包含了英文。若取消了中文或英語而勾選了其它語言，則只翻譯那些語言獨有的部分，如日語只翻譯假名。',
     doubleClickDelay: '滑鼠按兩下間隔',
-    mode: '普通選詞',
-    panelMode: '字典視窗介面內部選詞',
-    pinMode: '字典視窗介面釘住后選詞',
-    qsPanelMode: '滑鼠選字',
+    mode: '普通選字',
+    panelMode: '字典視窗介面內部選字',
+    pinMode: '字典視窗介面釘住后選字',
+    qsPanelMode: '獨立字典視窗介面響應頁面選字',
     bowlHover: '圖示暫留查字',
     bowlHover_help: '滑鼠暫留在沙拉圖示上開啟字典介面，否則需要點選。',
     autopron: {
@@ -273,7 +280,6 @@ export const locale: typeof _locale = {
 
     ankiconnect: {
       description: '請確保 Anki Connect 已安裝且 Anki 在執行。',
-      tutorial: '教程',
       checking: '連線中...',
       deck_confirm: '牌組「{{deck}}」不存在 Anki 中，是否自動新增？',
       deck_error: '無法建立牌組「{{deck}}」。',
@@ -301,7 +307,9 @@ export const locale: typeof _locale = {
       tags_help: 'Anki 筆記可以附帶標籤。以逗號分割。',
       escapeHTML: '轉義 HTML',
       escapeHTML_help:
-        '對筆記內容中的 HTML 字元進行轉義。如手動進行 HTML 排版請關閉選項。'
+        '對筆記內容中的 HTML 字元進行轉義。如手動進行 HTML 排版請關閉選項。',
+      syncServer: '同步伺服器',
+      syncServer_help: '單詞新增到本地 Anki 後自動同步到伺服器（如 AnkiWeb）。'
     }
   },
 
@@ -390,5 +398,23 @@ export const locale: typeof _locale = {
   third_party_privacy: '第三方隱私',
   third_party_privacy_help:
     '沙拉查詞不會收集更多資料，但在查詞時單詞以及相關 cookies 資料會發送給第三方詞典服務（與在該網站上查詞一樣），如果你不希望被該服務獲取資料，請在「詞典設定」中關閉相應詞典。',
-  third_party_privacy_extra: '本特性為沙拉查詞核心功能，無法關閉。'
+  third_party_privacy_extra: '本特性為沙拉查詞核心功能，無法關閉。',
+
+  permissions: {
+    success: '申請許可權成功',
+    cancel_success: '取消許可權成功',
+    failed: '申請許可權失敗',
+    cancelled: '申請許可權被使用者取消',
+    missing: '缺少許可權「{{permission}}」。請給予許可權或者關閉相關功能。',
+    clipboardRead: '讀取剪貼簿',
+    clipboardRead_help:
+      '快捷查詞或者右上彈框設定預載入剪貼簿時需要讀取剪貼簿許可權。',
+    clipboardWrite: '寫入剪貼簿',
+    clipboardWrite_help:
+      '機器翻譯詞典標題欄選單複製原文譯文或生詞本匯出到剪貼簿需要寫入剪貼簿許可權。'
+  },
+
+  unsupportedFeatures: {
+    ff: '火狐尚不支援「{{feature}}」功能。'
+  }
 }

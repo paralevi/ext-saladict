@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect } from 'react'
+import React, { FC, useRef, useLayoutEffect, useMemo, useEffect } from 'react'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import { TFunction } from 'i18next'
 import {
@@ -34,7 +34,7 @@ export interface SearchBoxProps {
  */
 export const SearchBox: FC<SearchBoxProps> = props => {
   // Textarea also shares the text so only replace here
-  const text = props.text.replace(/\s+/g, ' ')
+  const text = useMemo(() => props.text.replace(/\s+/g, ' '), [props.text])
 
   const [onSearchBoxFocusBlur, searchBoxFocusBlur$] = useObservableCallback(
     focusBlur
@@ -79,6 +79,8 @@ export const SearchBox: FC<SearchBoxProps> = props => {
   const focusInput = useRef(() => {
     if (inputRef.current) {
       inputRef.current.focus()
+      // Although search box is seleted on focus event
+      // this is needed as the box may be focused initially.
       inputRef.current.select()
     }
   }).current
@@ -90,11 +92,16 @@ export const SearchBox: FC<SearchBoxProps> = props => {
     focusInput()
   }
 
-  useEffect(() => {
+  const checkFocus = () => {
     if (props.shouldFocus && !hasTypedRef.current && !isShowSuggest) {
       focusInput()
     }
-  }, [props.text])
+  }
+
+  // useEffect is not quick enough on popup panel.
+  useLayoutEffect(checkFocus, [])
+  // On in-page panel, layout effect only works on the first time.
+  useEffect(checkFocus, [props.text])
 
   return (
     <>
@@ -127,13 +134,16 @@ export const SearchBox: FC<SearchBoxProps> = props => {
               searchText(props.text)
             }
           }}
-          onFocus={onSearchBoxFocusBlur}
+          onFocus={event => {
+            event.currentTarget.select()
+            onSearchBoxFocusBlur(event)
+          }}
           onBlur={onSearchBoxFocusBlur}
           value={text}
         />
 
         <CSSTransition
-          classNames="menuBar-SearchBox_Suggest"
+          classNames="csst-menuBar-SearchBox_Suggests"
           in={isShowSuggest}
           timeout={100}
           mountOnEnter={true}

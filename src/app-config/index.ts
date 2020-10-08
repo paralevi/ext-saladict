@@ -4,15 +4,17 @@ import { getAllDicts } from './dicts'
 import { getAllContextMenus } from './context-menus'
 import { MtaAutoUnfold as _MtaAutoUnfold } from './profiles'
 import { getDefaultDictAuths } from './auth'
+import { isFirefox } from '@/_helpers/saladict'
 
 export type LangCode = 'zh-CN' | 'zh-TW' | 'en'
 
-const langUI = browser.i18n.getUILanguage() || 'en'
-const langCode: LangCode = /^zh-CN|zh-TW|en$/.test(langUI)
-  ? langUI === 'zh-HK'
+const langUI = browser.i18n.getUILanguage()
+const langCode: LangCode =
+  langUI === 'zh-CN'
+    ? 'zh-CN'
+    : langUI === 'zh-TW' || langUI === 'zh-HK'
     ? 'zh-TW'
-    : (langUI as LangCode)
-  : 'en'
+    : 'en'
 
 export type DictConfigsMutable = ReturnType<typeof getAllDicts>
 export type DictConfigs = DeepReadonly<DictConfigsMutable>
@@ -45,10 +47,13 @@ export default getDefaultConfig
 
 function _getDefaultConfig() {
   return {
-    version: 13,
+    version: 14,
 
     /** activate app, won't affect triple-ctrl setting */
     active: true,
+
+    /** Run extension in background */
+    runInBg: false,
 
     /** enable Google analytics */
     analytics: true,
@@ -212,7 +217,7 @@ function _getDefaultConfig() {
     tripleCtrl: true,
 
     /** preload content on quick search panel */
-    qsPreload: 'clipboard' as PreloadSource,
+    qsPreload: 'selection' as PreloadSource,
 
     /** auto search when quick search panel opens */
     qsAuto: false,
@@ -239,7 +244,7 @@ function _getDefaultConfig() {
     qssaRectMemo: false,
 
     /** browser action panel preload source */
-    baPreload: 'clipboard' as PreloadSource,
+    baPreload: 'selection' as PreloadSource,
 
     /** auto search when browser action panel shows */
     baAuto: false,
@@ -252,7 +257,8 @@ function _getDefaultConfig() {
      * 'popup_standalone' - open standalone panel
      * others are same as context menus
      */
-    baOpen: 'popup_panel',
+    baOpen:
+      isFirefox || !langCode.startsWith('zh-') ? 'popup_panel' : 'caiyuntrs',
 
     /** context tranlate engines */
     ctxTrans: {
@@ -318,12 +324,10 @@ function _getDefaultConfig() {
     ] as [string, string][],
 
     contextMenus: {
-      selected: [
-        'view_as_pdf',
-        'google_translate',
-        'google_search',
-        'saladict'
-      ],
+      selected:
+        isFirefox || !langCode.startsWith('zh-')
+          ? ['view_as_pdf', 'google_translate', 'saladict']
+          : ['view_as_pdf', 'caiyuntrs', 'google_translate', 'saladict'],
       all: getAllContextMenus()
     },
 

@@ -2,6 +2,161 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.17.0](https://github.com/crimx/ext-saladict/compare/v7.15.1...v7.17.0) (2020-09-08)
+
+
+### Features
+
+* add lingocloud browser shortcut ([badd839](https://github.com/crimx/ext-saladict/commit/badd839a0c40602a79337b646a0b6baa6f66f834))
+* add Lingocloud trs ([fe75c7a](https://github.com/crimx/ext-saladict/commit/fe75c7a6c9431aeeaa63138b4fd1c1eff153124f))
+
+
+### Bug Fixes
+
+* **dicts:** add google tts ([bbbe0a1](https://github.com/crimx/ext-saladict/commit/bbbe0a10a6def4608ff850e849005997abb37ad6))
+* **options:** fix dict title overflows on small screens ([54d4fe3](https://github.com/crimx/ext-saladict/commit/54d4fe30ddd0a62f0c41bc7423bf0eb3c3a9309e))
+* **options:** replace react-sortable-hoc with react-beautiful-dnd ([7e3d0c7](https://github.com/crimx/ext-saladict/commit/7e3d0c744f1d1bc18c8778460f811f2a55d029a3)), closes [#966](https://github.com/crimx/ext-saladict/issues/966)
+* **panel:** remove text loading delay on standalone panel ([42827bb](https://github.com/crimx/ext-saladict/commit/42827bb30499c7b5788be9cb10f6c9f4cf191508)), closes [#974](https://github.com/crimx/ext-saladict/issues/974)
+* **panel:** simplify summoned panel initialization ([ae322be](https://github.com/crimx/ext-saladict/commit/ae322beb688414264ce6a2a4b958e69392ab4c2c))
+* **popup:** close popup panel after menus being triggered ([931afc2](https://github.com/crimx/ext-saladict/commit/931afc279ce6f9ff1e4ad211eccf2fd86f95f330))
+
+### [7.16.1](https://github.com/crimx/ext-saladict/compare/v7.15.1...v7.16.1) (2020-09-05)
+
+
+### Features
+
+* add lingocloud browser shortcut ([badd839](https://github.com/crimx/ext-saladict/commit/badd839a0c40602a79337b646a0b6baa6f66f834))
+* add Lingocloud trs ([fe75c7a](https://github.com/crimx/ext-saladict/commit/fe75c7a6c9431aeeaa63138b4fd1c1eff153124f))
+
+
+### Bug Fixes
+
+* **dicts:** add google tts ([bbbe0a1](https://github.com/crimx/ext-saladict/commit/bbbe0a10a6def4608ff850e849005997abb37ad6))
+* **options:** fix dict title overflows on small screens ([54d4fe3](https://github.com/crimx/ext-saladict/commit/54d4fe30ddd0a62f0c41bc7423bf0eb3c3a9309e))
+* **options:** replace react-sortable-hoc with react-beautiful-dnd ([7e3d0c7](https://github.com/crimx/ext-saladict/commit/7e3d0c744f1d1bc18c8778460f811f2a55d029a3)), closes [#966](https://github.com/crimx/ext-saladict/issues/966)
+* **panel:** remove text loading delay on standalone panel ([42827bb](https://github.com/crimx/ext-saladict/commit/42827bb30499c7b5788be9cb10f6c9f4cf191508)), closes [#974](https://github.com/crimx/ext-saladict/issues/974)
+* **popup:** close popup panel after menus being triggered ([931afc2](https://github.com/crimx/ext-saladict/commit/931afc279ce6f9ff1e4ad211eccf2fd86f95f330))
+
+## [7.16.0](https://github.com/crimx/ext-saladict/compare/v7.15.1...v7.16.0) (2020-09-04)
+
+
+### Features
+
+* add lingocloud browser shortcut ([badd839](https://github.com/crimx/ext-saladict/commit/badd839a0c40602a79337b646a0b6baa6f66f834))
+* add Lingocloud trs ([fe75c7a](https://github.com/crimx/ext-saladict/commit/fe75c7a6c9431aeeaa63138b4fd1c1eff153124f))
+
+
+### Bug Fixes
+
+* **dicts:** add google tts ([bbbe0a1](https://github.com/crimx/ext-saladict/commit/bbbe0a10a6def4608ff850e849005997abb37ad6))
+* **options:** fix dict title overflows on small screens ([54d4fe3](https://github.com/crimx/ext-saladict/commit/54d4fe30ddd0a62f0c41bc7423bf0eb3c3a9309e))
+* **options:** replace react-sortable-hoc with react-beautiful-dnd ([7e3d0c7](https://github.com/crimx/ext-saladict/commit/7e3d0c744f1d1bc18c8778460f811f2a55d029a3)), closes [#966](https://github.com/crimx/ext-saladict/issues/966)
+* **panel:** remove text loading delay on standalone panel ([42827bb](https://github.com/crimx/ext-saladict/commit/42827bb30499c7b5788be9cb10f6c9f4cf191508)), closes [#974](https://github.com/crimx/ext-saladict/issues/974)
+* **popup:** close popup panel after menus being triggered ([931afc2](https://github.com/crimx/ext-saladict/commit/931afc279ce6f9ff1e4ad211eccf2fd86f95f330))
+
+### [7.15.1](https://github.com/crimx/ext-saladict/compare/v7.15.0...v7.15.1) (2020-08-07)
+
+## [7.15.0](https://github.com/crimx/ext-saladict/compare/v7.14.5...v7.15.0) (2020-08-07)
+
+
+### Features
+
+* **sync-services:** add sync server to ankiconnect ([b6a7487](https://github.com/crimx/ext-saladict/commit/b6a74873b71282805892e8172961dec1a77e13bb))
+
+
+### Bug Fixes
+
+* **background:** remove background permission on Opera ([151b0a1](https://github.com/crimx/ext-saladict/commit/151b0a16320ff7ab875ad970525b358459f733a3)), closes [#916](https://github.com/crimx/ext-saladict/issues/916)
+* **dicts:** cambridge amp-img replacement ([1aed3f4](https://github.com/crimx/ext-saladict/commit/1aed3f41f24e0b91e5bf9b20ab11a3f38967d8a7)), closes [#939](https://github.com/crimx/ext-saladict/issues/939)
+* **dicts:** cambridge idiom-only entry ([0135b3e](https://github.com/crimx/ext-saladict/commit/0135b3e84ec85af382e2e94470b5c1705e1e830e)), closes [#940](https://github.com/crimx/ext-saladict/issues/940)
+* **dicts:** replace cambridge amp-audio ([aac184c](https://github.com/crimx/ext-saladict/commit/aac184cd9d9ddb035f8331457baf8b0a160a3224)), closes [#943](https://github.com/crimx/ext-saladict/issues/943)
+* **dicts:** same url for src page ([a0696e1](https://github.com/crimx/ext-saladict/commit/a0696e1709dd700d20d182c0f277025090a14608)), closes [#935](https://github.com/crimx/ext-saladict/issues/935)
+* **locales:** typo ([8dcb8e1](https://github.com/crimx/ext-saladict/commit/8dcb8e11cf5f9e40dd424fa332525329d3385ca4))
+* **panel:** reset opacity on root container ([40abbbc](https://github.com/crimx/ext-saladict/commit/40abbbc884f6ac3fba44e9423e9d4887048e91e0)), closes [#904](https://github.com/crimx/ext-saladict/issues/904)
+* **panel:** search box on in-page panel loses focus ([c1d5984](https://github.com/crimx/ext-saladict/commit/c1d598473d02dc247c218d48e183bfa58251def2)), closes [#927](https://github.com/crimx/ext-saladict/issues/927)
+* **panel:** select background color ([2a9c144](https://github.com/crimx/ext-saladict/commit/2a9c14484d56a2815bb9fb09d98f361e41616f52))
+* **panel:** support Super Dark Mode ([6e6164e](https://github.com/crimx/ext-saladict/commit/6e6164eeb9ec1f5eeff80bad3f3b9715a3627447)), closes [#947](https://github.com/crimx/ext-saladict/issues/947)
+* **sync-services:** shanbay batch upload interrupting ([5881389](https://github.com/crimx/ext-saladict/commit/5881389b05823258383ba7448eb836e6cb59bc30)), closes [#932](https://github.com/crimx/ext-saladict/issues/932)
+* **word-editor:** correct container dimension ([0b51e6b](https://github.com/crimx/ext-saladict/commit/0b51e6bb0026d363f728cde758e299219580c791))
+
+
+### Build System
+
+* **deps-dev:** bump standard-version from 6.0.1 to 8.0.1 ([#903](https://github.com/crimx/ext-saladict/issues/903)) ([d1ac2b5](https://github.com/crimx/ext-saladict/commit/d1ac2b57d576f4eaaa94f3a8a6595b44a28b76f1))
+
+### [7.14.5](https://github.com/crimx/ext-saladict/compare/v7.14.4...v7.14.5) (2020-07-12)
+
+
+### Bug Fixes
+
+* **panel:** set missing initial config ([791cb57](https://github.com/crimx/ext-saladict/commit/791cb57cbd40264b255da03576693af3a15daf24))
+
+### [7.14.4](https://github.com/crimx/ext-saladict/compare/v7.14.3...v7.14.4) (2020-07-12)
+
+
+### Bug Fixes
+
+* **dicts:** correct machine translator rtl source text collapse fading ([42003e5](https://github.com/crimx/ext-saladict/commit/42003e51c0c3778c3ecbc0d6771142baae720ab9))
+
+
+### Build System
+
+* always strip momentjs locales ([7dbb309](https://github.com/crimx/ext-saladict/commit/7dbb309bbe3caafc70348999ca5e4526fd649618))
+
+### [7.14.3](https://github.com/crimx/ext-saladict/compare/v7.14.2...v7.14.3) (2020-07-12)
+
+
+### Bug Fixes
+
+* **panel:** fix machine source text fade color ([b36deb6](https://github.com/crimx/ext-saladict/commit/b36deb68df02254da2577cad4b9eb65722e5155a))
+
+### [7.14.2](https://github.com/crimx/ext-saladict/compare/v7.14.1...v7.14.2) (2020-07-12)
+
+
+### Bug Fixes
+
+* **panel:** move saladict-theme down under darkMode ([52d8fb2](https://github.com/crimx/ext-saladict/commit/52d8fb20dd9d53a83b0c1f807102220977aa9e0d))
+
+### [7.14.1](https://github.com/crimx/ext-saladict/compare/v7.14.0...v7.14.1) (2020-07-12)
+
+
+### Bug Fixes
+
+* **options:** update antd typings ([2879c4f](https://github.com/crimx/ext-saladict/commit/2879c4fe9e1ef6a5397ac807ce94a2d188d61d30))
+* fixed incorrect options merging ([8e062dc](https://github.com/crimx/ext-saladict/commit/8e062dc7dc87642da282bcceeabbaf86d58770f4))
+* switch default slInitial back to collapse ([524223c](https://github.com/crimx/ext-saladict/commit/524223c4a2cfafd5a0a8d0a2eb6fa494926e5099))
+
+
+### Build System
+
+* add sass globals to storybook ([f44ce5a](https://github.com/crimx/ext-saladict/commit/f44ce5a6bd54b2f3346d63934151db6aa76789d0))
+
+## [7.14.0](https://github.com/crimx/ext-saladict/compare/v7.13.4...v7.14.0) (2020-07-10)
+
+
+### Features
+
+* **background:** add background permission ([9d41e09](https://github.com/crimx/ext-saladict/commit/9d41e0980e17dffbcce2804a66b850f9e33c147e)), closes [#892](https://github.com/crimx/ext-saladict/issues/892)
+* **menus:** add saladict standlone panel ([0d4a732](https://github.com/crimx/ext-saladict/commit/0d4a73278a523405b1ab1d28ade9d514826ecd4a)), closes [#864](https://github.com/crimx/ext-saladict/issues/864)
+* **panel:** add dict item catalog ([f07ea25](https://github.com/crimx/ext-saladict/commit/f07ea25751fcb746363e09b3804da03520b35249))
+
+
+### Bug Fixes
+
+* **components:** fix select padding in firefox ([dd366d3](https://github.com/crimx/ext-saladict/commit/dd366d396e8ca63298aeb70a575dfaad858f75b7))
+* **components:** typo ([0229cc2](https://github.com/crimx/ext-saladict/commit/0229cc28124567cbe6a79c71d474c935da094756))
+* **dicts:** update tts for tencent and caiyun ([afdac41](https://github.com/crimx/ext-saladict/commit/afdac41d4099aef1efa6021c60b741e3ad6fda22))
+* **options:** update sortable list on store changes ([075aef7](https://github.com/crimx/ext-saladict/commit/075aef764d8327f78288e0d6d183ae51f9f82f48))
+* **panel:** correct panel history ([1b2781f](https://github.com/crimx/ext-saladict/commit/1b2781f48e875f07536be14a733e93a901db5958)), closes [#881](https://github.com/crimx/ext-saladict/issues/881)
+* **panel:** fix catalog scrolling ([ded090d](https://github.com/crimx/ext-saladict/commit/ded090d81b7d2bd66b0c12806a1c3fa457257328))
+
+
+### Tests
+
+* **panel:** update dict item stories ([507c638](https://github.com/crimx/ext-saladict/commit/507c638ba34a9b903cbee06b36056ede15c66a2d))
+* update stories ([49b2ad2](https://github.com/crimx/ext-saladict/commit/49b2ad2eb68e0b39117b224ad1c05264b8ed678f))
+* **dicts:** log runtime messages ([5c23327](https://github.com/crimx/ext-saladict/commit/5c23327db3f6b44f25487b3cc0866ab38741adc9))
+
 ### [7.13.4](https://github.com/crimx/ext-saladict/compare/v7.13.3...v7.13.4) (2020-06-23)
 
 

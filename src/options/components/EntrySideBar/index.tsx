@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useState } from 'react'
 import { Layout, Menu, Affix, Modal } from 'antd'
 import {
   SettingOutlined,
@@ -16,12 +16,14 @@ import {
   SwapOutlined,
   LockOutlined,
   ExclamationCircleOutlined,
+  SafetyCertificateOutlined,
   KeyOutlined
 } from '@ant-design/icons'
 import { useObservableState } from 'observable-hooks'
+import classnames from 'classnames'
 import { debounceTime, scan, distinctUntilChanged } from 'rxjs/operators'
 import { useTranslate } from '@/_helpers/i18n'
-import { GlobalsContext } from '@/options/data'
+import { setFormDirty, useFormDirty } from '@/options/helpers/use-form-dirty'
 
 import './_style.scss'
 
@@ -32,7 +34,7 @@ export interface EntrySideBarProps {
 
 export const EntrySideBar: FC<EntrySideBarProps> = props => {
   const { t } = useTranslate('options')
-  const globals = useContext(GlobalsContext)
+  const formDirtyRef = useFormDirty()
   // trigger affix rerendering on collapse state changes to update width
   const [affixKey, onCollapse] = useObservableState<number, boolean>(event$ =>
     event$.pipe(
@@ -41,12 +43,15 @@ export const EntrySideBar: FC<EntrySideBarProps> = props => {
       scan(id => (id + 1) % 10000, 0) // unique id
     )
   )
+  const [affixed, setAffixed] = useState<boolean>()
 
   return (
-    <Affix key={affixKey}>
+    <Affix key={affixKey} onChange={setAffixed}>
       <Layout>
         <Layout.Sider
-          className="entry-sidebar fancy-scrollbar"
+          className={classnames('entry-sidebar', 'fancy-scrollbar', {
+            isAffixed: affixed
+          })}
           width={180}
           breakpoint="lg"
           collapsible
@@ -58,10 +63,10 @@ export const EntrySideBar: FC<EntrySideBarProps> = props => {
             selectedKeys={[props.entry]}
             onSelect={({ key }) => {
               const switchTab = () => {
-                props.onChange(key)
-                ;(globals as GlobalsContext).dirty = false
+                props.onChange(`${key}`)
+                setFormDirty(false)
               }
-              if (globals.dirty) {
+              if (formDirtyRef.value) {
                 Modal.confirm({
                   title: t('unsave_confirm'),
                   icon: <ExclamationCircleOutlined />,
@@ -130,8 +135,12 @@ export const EntrySideBar: FC<EntrySideBarProps> = props => {
               <span>{t('nav.ImportExport')}</span>
             </Menu.Item>
             <Menu.Item key="Privacy">
-              <LockOutlined />
+              <SafetyCertificateOutlined />
               <span>{t('nav.Privacy')}</span>
+            </Menu.Item>
+            <Menu.Item key="Permissions">
+              <LockOutlined />
+              <span>{t('nav.Permissions')}</span>
             </Menu.Item>
           </Menu>
         </Layout.Sider>

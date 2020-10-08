@@ -34,7 +34,12 @@ export const locale = {
     sl: '来源语言',
     tl: '目标语言',
     auto: '自动检测',
-    stext: '原文'
+    stext: '原文',
+    showSl: '显示原文',
+    copySrc: '复制原文',
+    copyTrans: '复制译文',
+    login: '请登录{词典帐号}以使用。',
+    dictAccount: '词典帐号'
   },
   updateAnki: {
     title: '更新到 Anki',

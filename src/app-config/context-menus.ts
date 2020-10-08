@@ -11,6 +11,7 @@ export function getAllContextMenus(): { [id: string]: ContextItem } {
     baidu_search: 'https://www.baidu.com/s?ie=utf-8&wd=%s',
     bing_dict: 'https://cn.bing.com/dict/?q=%s',
     bing_search: 'https://www.bing.com/search?q=%s',
+    caiyuntrs: 'x',
     cambridge:
       'http://dictionary.cambridge.org/spellcheck/english-chinese-simplified/?q=%s',
     copy_pdf_url: 'x',
@@ -29,6 +30,7 @@ export function getAllContextMenus(): { [id: string]: ContextItem } {
     microsoft_page_translate: 'x',
     oxford: 'http://www.oxforddictionaries.com/us/definition/english/%s',
     saladict: 'x',
+    saladict_standalone: 'x',
     sogou_page_translate: 'x',
     sogou: 'https://fanyi.sogou.com/#auto/zh-CHS/%s',
     termonline: 'https://www.termonline.cn/list.htm?k=%s',

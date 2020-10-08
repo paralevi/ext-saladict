@@ -1,4 +1,16 @@
-export function copyTextToClipboard(text: string): void {
+import { openURL } from '@/_helpers/browser-api'
+
+export async function copyTextToClipboard(text: string): Promise<void> {
+  if (
+    !(await browser.permissions.contains({ permissions: ['clipboardWrite'] }))
+  ) {
+    openURL(
+      '/options.html?menuselected=Permissions&missing_permission=clipboardWrite',
+      true
+    )
+    return
+  }
+
   const copyFrom = document.createElement('textarea')
   copyFrom.textContent = text
   document.body.appendChild(copyFrom)
@@ -8,7 +20,17 @@ export function copyTextToClipboard(text: string): void {
   document.body.removeChild(copyFrom)
 }
 
-export function getTextFromClipboard(): string {
+export async function getTextFromClipboard(): Promise<string> {
+  if (
+    !(await browser.permissions.contains({ permissions: ['clipboardRead'] }))
+  ) {
+    openURL(
+      '/options.html?menuselected=Permissions&missing_permission=clipboardRead',
+      true
+    )
+    return ''
+  }
+
   if (process.env.NODE_ENV === 'development') {
     return 'clipboard content'
   } else {

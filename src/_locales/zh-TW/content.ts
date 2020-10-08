@@ -36,7 +36,12 @@ export const locale: typeof _locale = {
     sl: '來源語言',
     tl: '目標語言',
     auto: '偵測語言',
-    stext: '原文'
+    stext: '原文',
+    showSl: '顯示原文',
+    copySrc: '複製原文',
+    copyTrans: '複製譯文',
+    login: '請登入{詞典帳號}以使用。',
+    dictAccount: '詞典帳號'
   },
   updateAnki: {
     title: '更新到 Anki',

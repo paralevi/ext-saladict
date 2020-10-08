@@ -1,18 +1,31 @@
+import { PromiseType } from 'utility-types'
 import { newWord, Word } from '@/_helpers/record-manager'
-import { getDefaultConfig, DictID } from '@/app-config'
-import { getDefaultProfile, ProfileIDList } from '@/app-config/profiles'
+import { DictID } from '@/app-config'
+import { getConfig } from '@/_helpers/config-manager'
+import { getProfileIDList, getActiveProfile } from '@/_helpers/profile-manager'
 import {
   isQuickSearchPage,
   isStandalonePage,
-  isOptionsPage
+  isOptionsPage,
+  isPopupPage
 } from '@/_helpers/saladict'
+import { DictSearchResult } from '@/components/dictionaries/helpers'
 
-export const initState = () => {
-  const config = getDefaultConfig()
+export const initState = async () => {
+  const pConfig = getConfig()
+  const pProfiles = getProfileIDList()
+  const pActiveProfile = getActiveProfile()
+
+  const config = await pConfig
+  const profiles = await pProfiles
+  const activeProfile = await pActiveProfile
+
+  const url = window.location.href
+
   return {
     config,
-    profiles: [] as ProfileIDList,
-    activeProfile: getDefaultProfile(),
+    profiles,
+    activeProfile,
     selection: {
       word: newWord() as Word | null,
       mouseX: 0,
@@ -27,7 +40,9 @@ export const initState = () => {
       force: false
     },
     /** Temporary disable Saladict */
-    isTempDisabled: false,
+    isTempDisabled:
+      config.blacklist.some(([r]) => new RegExp(r).test(url)) &&
+      config.whitelist.every(([r]) => !new RegExp(r).test(url)),
     /**
      * Is current panel a Quick Search Panel,
      * which could be in a standalone window or in-page element.
@@ -44,7 +59,10 @@ export const initState = () => {
     },
     isShowBowl: false,
     isShowDictPanel: isStandalonePage(),
-    isExpandMtaBox: false,
+    isExpandMtaBox:
+      activeProfile.mtaAutoUnfold === 'once' ||
+      activeProfile.mtaAutoUnfold === 'always' ||
+      (activeProfile.mtaAutoUnfold === 'popup' && isPopupPage()),
     isExpandWaveformBox: false,
     isPinned: false,
     /** Is current word in Notebook */
@@ -64,12 +82,13 @@ export const initState = () => {
       /** independent layer */
       floatHeight: 0
     },
-    panelMaxHeight: window.innerHeight * 0.8,
+    panelMaxHeight: (window.innerHeight * config.panelMaxHeightRatio) / 100,
     /** Dicts that will be rendered to dict panel */
     renderedDicts: [] as {
       readonly id: DictID
       readonly searchStatus: 'IDLE' | 'SEARCHING' | 'FINISH'
       readonly searchResult: any
+      readonly catalog?: DictSearchResult<DictID>['catalog']
     }[],
     /** User manually folded or unfolded */
     userFoldedDicts: {} as { [id in DictID]?: boolean },
@@ -85,6 +104,6 @@ export const initState = () => {
   }
 }
 
-export type State = ReturnType<typeof initState>
+export type State = PromiseType<ReturnType<typeof initState>>
 
 export default initState

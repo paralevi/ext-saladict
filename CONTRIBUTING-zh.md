@@ -19,6 +19,8 @@ yarn install
 yarn pdf
 ```
 
+在项目根添加 `.env` 文件，参考 `.env.example` 格式（可留空如果你不需要这些词典）。
+
 ## 修改 UI
 
 运行 `yarn fixtures` 下载测试文件（下载完成以后不必再运行）。
@@ -85,4 +87,4 @@ yarn pdf
 
 本项目遵循 [conventional](https://conventionalcommits.org/) commit 格式。
 
-你可以在 commit 时运行 `yarn commit` 按指示选择。或者在 VSCode 中使用 [vscode-commitizen](https://github.com/KnisterPeter/vscode-commitizen) 插件。
+你可以在 commit 时运行 `yarn commit` 按指示选择。或者在 VSCode 中使用 [VSCode Conventional Commits](https://github.com/vivaxy/vscode-conventional-commits) 插件。

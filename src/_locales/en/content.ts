@@ -36,7 +36,12 @@ export const locale: typeof _locale = {
     sl: 'Source Language',
     tl: 'Target Language',
     auto: 'Detect language',
-    stext: 'Original'
+    stext: 'Original',
+    showSl: 'Show Source',
+    copySrc: 'Copy Source',
+    copyTrans: 'Copy Translation',
+    login: 'Please provide {access token}.',
+    dictAccount: 'access token'
   },
   updateAnki: {
     title: 'Update to Anki',
