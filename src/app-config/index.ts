@@ -104,6 +104,10 @@ function _getDefaultConfig() {
       [
         '^(http|https)://[^/]*?googleusercontent\\.com(/.*)?$',
         '*://*.googleusercontent.com/*'
+      ],
+      [
+        '^(http|https)://sh-download\\.weiyun\\.com(/.*)?$',
+        '*://sh-download.weiyun.com/*'
       ]
     ] as [string, string][],
 
@@ -189,7 +193,7 @@ function _getDefaultConfig() {
     /** when this is a quick search standalone panel running */
     qsPanelMode: {
       /** direct: on mouseup */
-      direct: false,
+      direct: true,
       /** double: double click */
       double: false,
       /** holding a key */
@@ -243,6 +247,11 @@ function _getDefaultConfig() {
     /** should standalone panel memo position and dimension on close */
     qssaRectMemo: false,
 
+    /** browser action panel width defaults to as wide as possible */
+    baWidth: -1,
+
+    baHeight: 550,
+
     /** browser action panel preload source */
     baPreload: 'selection' as PreloadSource,
 
@@ -257,8 +266,7 @@ function _getDefaultConfig() {
      * 'popup_standalone' - open standalone panel
      * others are same as context menus
      */
-    baOpen:
-      isFirefox || !langCode.startsWith('zh-') ? 'popup_panel' : 'caiyuntrs',
+    baOpen: 'popup_panel',
 
     /** context tranlate engines */
     ctxTrans: {
