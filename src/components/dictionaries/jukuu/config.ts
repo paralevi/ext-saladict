@@ -5,10 +5,11 @@ export type JukuuConfig = DictItem<{
 }>
 
 export default (): JukuuConfig => ({
-  lang: '11010000',
+  lang: '110100000',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,
@@ -20,6 +21,7 @@ export default (): JukuuConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

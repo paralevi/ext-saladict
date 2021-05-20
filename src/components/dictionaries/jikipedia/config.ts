@@ -5,10 +5,11 @@ export type UrbanConfig = DictItem<{
 }>
 
 export default (): UrbanConfig => ({
-  lang: '01000000',
+  lang: '010000000',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -20,6 +21,7 @@ export default (): UrbanConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

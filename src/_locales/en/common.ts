@@ -37,6 +37,7 @@ export const locale: typeof _locale = {
     eng: 'English',
     english: 'English',
     french: 'French',
+    italian: 'Italian',
     japanese: 'Japanese',
     korean: 'Korean',
     matchAll: 'Match every character',
@@ -69,6 +70,7 @@ export const locale: typeof _locale = {
     default: 'Default Mode',
     scholar: 'Scholar Mode',
     translation: 'Translation Mode',
-    nihongo: 'Japanese Mode'
+    nihongo: 'Japanese Mode',
+    italiano: 'Italian Mode'
   }
 }

@@ -1,15 +1,16 @@
 import { DictItem } from '@/app-config/dicts'
 
 export type CambridgeConfig = DictItem<{
-  lang: 'default' | 'en' | 'en-chs' | 'en-chz'
+  lang: 'default' | 'en' | 'en-chs' | 'en-chz' | 'it'
   related: boolean
 }>
 
 export default (): CambridgeConfig => ({
-  lang: '11100000',
+  lang: '111000001',
   selectionLang: {
     english: true,
     chinese: false,
+    italian: true,
     japanese: false,
     korean: false,
     french: false,
@@ -21,6 +22,7 @@ export default (): CambridgeConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: true,
     japanese: true,
     korean: true,
     french: true,
@@ -39,6 +41,6 @@ export default (): CambridgeConfig => ({
     related: true
   },
   options_sel: {
-    lang: ['default', 'en', 'en-chs', 'en-chz']
+    lang: ['default', 'en', 'en-chs', 'en-chz', 'it']
   }
 })

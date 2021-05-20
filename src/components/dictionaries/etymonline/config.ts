@@ -6,10 +6,11 @@ export type EtymonlineConfig = DictItem<{
 }>
 
 export default (): EtymonlineConfig => ({
-  lang: '10000000',
+  lang: '100000000',
   selectionLang: {
     english: true,
     chinese: false,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -21,6 +22,7 @@ export default (): EtymonlineConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

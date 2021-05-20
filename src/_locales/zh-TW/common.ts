@@ -37,6 +37,7 @@ export const locale: typeof _locale = {
     eng: '英文',
     english: '英文',
     french: '法文',
+    italian: '意大利文',
     japanese: '日文',
     korean: '韓文',
     minor: '其它語言',
@@ -69,6 +70,7 @@ export const locale: typeof _locale = {
     default: '預設模式',
     scholar: '學術模式',
     translation: '翻譯模式',
-    nihongo: '日語模式'
+    nihongo: '日語模式',
+    italiano: '意大利語模式'
   }
 }

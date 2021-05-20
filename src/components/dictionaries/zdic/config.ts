@@ -5,10 +5,11 @@ export type ZdicConfig = DictItem<{
 }>
 
 export default (): ZdicConfig => ({
-  lang: '01000000',
+  lang: '010000000',
   selectionLang: {
     english: false,
     chinese: true,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -20,6 +21,7 @@ export default (): ZdicConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

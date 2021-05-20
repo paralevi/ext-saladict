@@ -6,10 +6,11 @@ export type NaverConfig = DictItem<{
 }>
 
 export default (): NaverConfig => ({
-  lang: '01011000',
+  lang: '010110000',
   selectionLang: {
     english: false,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: false,
@@ -21,6 +22,7 @@ export default (): NaverConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

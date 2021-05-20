@@ -5,10 +5,11 @@ export type WikipediaConfig = DictItem<{
 }>
 
 export default (): WikipediaConfig => ({
-  lang: '11110000',
+  lang: '111100000',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,
@@ -20,6 +21,7 @@ export default (): WikipediaConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

@@ -7,10 +7,11 @@ export type CnkiConfig = DictItem<{
 }>
 
 export default (): CnkiConfig => ({
-  lang: '11000000',
+  lang: '110000000',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -22,6 +23,7 @@ export default (): CnkiConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

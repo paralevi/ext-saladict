@@ -11,7 +11,7 @@ export interface DictTitleProps {
   dictLangs: string
 }
 
-const langCodes = ['en', 'zhs', 'zht', 'ja', 'kor', 'fr', 'de', 'es'] as const
+const langCodes = ['en', 'zhs', 'zht', 'ja', 'kor', 'fr', 'de', 'es', 'it'] as const
 
 export const DictTitle: FC<DictTitleProps> = ({ dictID, dictLangs }) => {
   const { t } = useTranslate(['options', 'dicts'])

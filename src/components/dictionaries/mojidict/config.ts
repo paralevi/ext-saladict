@@ -3,10 +3,11 @@ import { DictItem } from '@/app-config/dicts'
 export type LianganConfig = DictItem
 
 export default (): LianganConfig => ({
-  lang: '10010000',
+  lang: '100100000',
   selectionLang: {
     english: false,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: false,
     french: false,
@@ -18,6 +19,7 @@ export default (): LianganConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

@@ -76,6 +76,7 @@ export function genProfilesStorage(): {
   const translationStorage = translation()
   const scholarStorage = scholar()
   const nihongoStorage = nihongo()
+  const italianoStorage = italiano()
 
   return {
     profileIDList: [
@@ -83,14 +84,16 @@ export function genProfilesStorage(): {
       sentenceStorage.idItem,
       translationStorage.idItem,
       scholarStorage.idItem,
-      nihongoStorage.idItem
+      nihongoStorage.idItem,
+      italianoStorage.idItem
     ],
     profiles: [
       defaultProfile,
       sentenceStorage.profile,
       translationStorage.profile,
       scholarStorage.profile,
-      nihongoStorage.profile
+      nihongoStorage.profile,
+      italianoStorage.profile
     ]
   }
 }
@@ -158,6 +161,7 @@ export function scholar(): ProfileStorage {
     matchAll: false,
     english: false,
     chinese: false,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -169,6 +173,7 @@ export function scholar(): ProfileStorage {
     matchAll: false,
     english: false,
     chinese: false,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -180,6 +185,7 @@ export function scholar(): ProfileStorage {
     matchAll: false,
     english: false,
     chinese: false,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -219,10 +225,6 @@ export function nihongo(): ProfileStorage {
 
   const profile = getDefaultProfile(idItem.id) as ProfileMutable
   profile.dicts.selected = [
-    'mojidict',
-    'hjdict',
-    'weblioejje',
-    'weblio',
     'google',
     'tencent',
     'caiyun',
@@ -231,6 +233,22 @@ export function nihongo(): ProfileStorage {
   ]
   profile.dicts.all.wikipedia.options.lang = 'ja'
   profile.waveform = false
+
+  return { idItem, profile }
+}
+
+export function italiano(): ProfileStorage {
+  const idItem = getDefaultProfileID()
+  idItem.name = '%%_italiano_%%'
+
+  const profile = getDefaultProfile(idItem.id) as ProfileMutable
+  profile.dicts.selected = [
+    'google',
+    'cambridge'
+  ]
+
+  const allDict = profile.dicts.all
+  allDict.cambridge.options.lang = 'it'
 
   return { idItem, profile }
 }

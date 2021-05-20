@@ -248,6 +248,7 @@ export const locale: typeof _locale = {
       en: 'En',
       es: 'Es',
       fr: 'Fr',
+      it: 'It',
       ja: 'Ja',
       kor: 'Kor',
       zhs: 'Zhs',

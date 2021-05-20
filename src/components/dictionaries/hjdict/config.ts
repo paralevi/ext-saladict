@@ -10,10 +10,11 @@ export type HjdictConfig = DictItem<{
 }>
 
 export default (): HjdictConfig => ({
-  lang: '10011111',
+  lang: '100111110',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,
@@ -25,6 +26,7 @@ export default (): HjdictConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

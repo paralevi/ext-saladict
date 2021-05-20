@@ -10,10 +10,11 @@ export type YoudaoConfig = DictItem<{
 }>
 
 export default (): YoudaoConfig => ({
-  lang: '11000000',
+  lang: '110000000',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -25,6 +26,7 @@ export default (): YoudaoConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: true,
     japanese: true,
     korean: true,
     french: true,

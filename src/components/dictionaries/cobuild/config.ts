@@ -5,10 +5,11 @@ export type CobuildConfig = DictItem<{
 }>
 
 export default (): CobuildConfig => ({
-  lang: '10000000',
+  lang: '100000001',
   selectionLang: {
     english: true,
     chinese: false,
+    italian: true,
     japanese: false,
     korean: false,
     french: false,
@@ -20,6 +21,7 @@ export default (): CobuildConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: true,
     japanese: true,
     korean: true,
     french: true,

@@ -35,6 +35,7 @@ export const locale = {
     eng: '英文',
     english: '英文',
     french: '法文',
+    italian: '意大利文',
     japanese: '日文',
     korean: '韩文',
     minor: '其它语言',
@@ -67,6 +68,7 @@ export const locale = {
     default: '默认模式',
     scholar: '学术模式',
     translation: '翻译模式',
-    nihongo: '日语模式'
+    nihongo: '日语模式',
+    italiano: '意大利语模式'
   }
 }

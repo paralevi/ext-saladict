@@ -11,10 +11,11 @@ export type LongmanConfig = DictItem<{
 }>
 
 export default (): LongmanConfig => ({
-  lang: '10000000',
+  lang: '100000000',
   selectionLang: {
     english: true,
     chinese: false,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -26,6 +27,7 @@ export default (): LongmanConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

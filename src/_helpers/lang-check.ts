@@ -3,6 +3,7 @@ import memoizeOne from 'memoize-one'
 const languages = [
   'chinese',
   'english',
+  'italian',
   'japanese',
   'korean',
   'french',
@@ -15,6 +16,8 @@ type Languages = typeof languages[number]
 const matchers: { [key in Languages]: RegExp } = {
   chinese: /[\u4e00-\u9fa5]/,
   english: /[a-zA-Z]/,
+  /** Italian, no English àéèìòùÀÉÈÌÒÙ*/
+  italian: /[\u00e0\u00e9\u00e8\u00ec\u00f2\u00f9\u00c0\u00c9\u00c8\u00cc\u00d2\u00d9]/,
   /** Hiragana & Katakana, no Chinese */
   japanese: /[\u3041-\u3096\u30A0-\u30FF]/,
   /** Korean Hangul, no Chinese */
@@ -32,6 +35,10 @@ export const isContainChinese = (text: string): boolean =>
 
 export const isContainEnglish = (text: string): boolean =>
   matchers.english.test(text)
+
+/** Italian, no English àéèìòùÀÉÈÌÒÙ*/
+export const isContainItalian = (text: string): boolean =>
+  matchers.italian.test(text)
 
 /** Hiragana & Katakana, no Chinese */
 export const isContainJapanese = (text: string): boolean =>
@@ -56,6 +63,8 @@ export const isContainSpanish = (text: string): boolean =>
 const isContain: { [key in Languages]: (text: string) => boolean } = {
   chinese: memoizeOne(isContainChinese),
   english: memoizeOne(isContainEnglish),
+  /** Italian, no English àéèìòùÀÉÈÌÒÙ*/
+  italian: memoizeOne(isContainItalian),
   /** Hiragana & Katakana, no Chinese */
   japanese: memoizeOne(isContainJapanese),
   /** Korean Hangul, no Chinese */

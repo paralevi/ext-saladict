@@ -5,10 +5,11 @@ export type GoogledictConfig = DictItem<{
 }>
 
 export default (): GoogledictConfig => ({
-  lang: '11110000',
+  lang: '111100000',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,
@@ -20,6 +21,7 @@ export default (): GoogledictConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

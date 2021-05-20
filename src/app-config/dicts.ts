@@ -87,7 +87,7 @@ interface DictItemBase {
   selectionLang: SupportedLangs
   /**
    * If set to true, the dict start searching automatically.
-   * Otherwise it'll only start seaching when user clicks the unfold button.
+   * Otherwise it'll only start searching when user clicks the unfold button.
    * Default MUST be true and let user decide.
    */
   defaultUnfold: SupportedLangs

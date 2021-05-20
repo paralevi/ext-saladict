@@ -3,10 +3,11 @@ import { DictItem } from '@/app-config/dicts'
 export type WeblioConfig = DictItem
 
 export default (): WeblioConfig => ({
-  lang: '00010000',
+  lang: '000100000',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: false,
     french: false,
@@ -18,6 +19,7 @@ export default (): WeblioConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,

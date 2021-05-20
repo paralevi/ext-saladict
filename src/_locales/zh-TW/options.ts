@@ -240,6 +240,7 @@ export const locale: typeof _locale = {
       en: '英',
       es: '西',
       fr: '法',
+      it: '意',
       ja: '日',
       kor: '韓',
       zhs: '简',

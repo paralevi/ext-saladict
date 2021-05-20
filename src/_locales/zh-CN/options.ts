@@ -236,6 +236,7 @@ export const locale = {
       en: '英',
       es: '西',
       fr: '法',
+      it: '意',
       ja: '日',
       kor: '韩',
       zhs: '简',

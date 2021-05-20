@@ -56,6 +56,17 @@ export const getSrcPage: GetSrcPageFunction = async (text, config, profile) => {
         encodeURIComponent(chsToChz(text))
       )
     }
+    case 'it': {
+      return (
+        'https://dictionary.cambridge.org/dictionary/italian-english/' +
+        encodeURIComponent(
+          text
+            .trim()
+            .split(/\s+/)
+            .join('-')
+        )
+      )
+    }
   }
 }
 
@@ -88,6 +99,24 @@ function handleDOM(
   const result: CambridgeResult = []
   const catalog: NonNullable<CambridgeSearchResult['catalog']> = []
   const audio: { us?: string; uk?: string } = {}
+
+  // italian hack
+  doc.querySelectorAll('.dictionary').forEach(($entry, i) => {
+    sanitizeEntry($entry)
+    const entryId = `d-cambridge-entry${i}`
+
+    result.push({
+      id: entryId,
+      html: getInnerHTML(HOST, $entry)
+    })
+
+    catalog.push({
+      key: `#${i}`,
+      value: entryId,
+      label:
+        '#' + getText($entry, '.di-title') + ' ' + getText($entry, '.posgram')
+    })
+  })
 
   doc.querySelectorAll('.entry-body__el').forEach(($entry, i) => {
     if (!getText($entry, '.headword')) {

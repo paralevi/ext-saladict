@@ -3,10 +3,11 @@ import { DictItem } from '@/app-config/dicts'
 export type RenrenConfig = DictItem
 
 export default (): RenrenConfig => ({
-  lang: '11000000',
+  lang: '110000000',
   selectionLang: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: false,
     korean: false,
     french: false,
@@ -18,6 +19,7 @@ export default (): RenrenConfig => ({
   defaultUnfold: {
     english: true,
     chinese: true,
+    italian: false,
     japanese: true,
     korean: true,
     french: true,
